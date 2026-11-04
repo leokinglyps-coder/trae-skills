@@ -1,0 +1,778 @@
+{
+  "last_node_id": 900,
+  "last_link_id": 15,
+  "nodes": [
+    {
+      "id": 507,
+      "type": "CFGGuider",
+      "pos": [
+        80,
+        80
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 7
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": 911
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CFGGuider"
+      },
+      "widgets_values": [
+        1
+      ],
+      "widgets_values_named": {
+        "cfg": 8
+      }
+    },
+    {
+      "id": 453,
+      "type": "CLIPLoader",
+      "pos": [
+        480,
+        80
+      ],
+      "size": [
+        510,
+        120
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_8b_int8_convrot.safetensors",
+        "qwen_image",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+        "type": "qwen_image",
+        "device": "default"
+      }
+    },
+    {
+      "id": 503,
+      "type": "KSamplerSelect",
+      "pos": [
+        880,
+        80
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "title": "KSampler Select (euler)",
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "widgets_values_named": {
+        "sampler_name": "euler"
+      }
+    },
+    {
+      "id": 900,
+      "type": "LoadImage",
+      "pos": [
+        1280,
+        80
+      ],
+      "size": [
+        320,
+        360
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": []
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "photo_edit_src.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 502,
+      "type": "ManualSigmas",
+      "pos": [
+        80,
+        500
+      ],
+      "size": [
+        418.9732421875,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "title": "Manual Sigmas (Qwen-Image-2.1-Turbo 8-step schedule)",
+      "properties": {
+        "Node name for S&R": "ManualSigmas"
+      },
+      "widgets_values": [
+        "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+      ],
+      "widgets_values_named": {
+        "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+      }
+    },
+    {
+      "id": 469,
+      "type": "QwenImage21Cache",
+      "pos": [
+        480,
+        500
+      ],
+      "size": [
+        270,
+        90
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "name": "device",
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        },
+        {
+          "name": "dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "QwenImage21Cache"
+      },
+      "widgets_values": [
+        "auto",
+        "default"
+      ],
+      "widgets_values_named": {
+        "device": "auto",
+        "dtype": "default"
+      }
+    },
+    {
+      "id": 504,
+      "type": "RandomNoise",
+      "pos": [
+        880,
+        500
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "widget": {
+            "name": "noise_seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "title": "Random Noise",
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        424242,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "noise_seed": 424242,
+        "control_after_generate": "randomize"
+      }
+    },
+    {
+      "id": 505,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1280,
+        500
+      ],
+      "size": [
+        220.2388671875,
+        106
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 3
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 10
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 4
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 5
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "title": "Sampler Custom Advanced",
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      }
+    },
+    {
+      "id": 461,
+      "type": "SaveImageAdvanced",
+      "pos": [
+        80,
+        920
+      ],
+      "size": [
+        710,
+        760
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImageAdvanced"
+      },
+      "widgets_values": [
+        "qwen_edit_couple",
+        "png",
+        "8-bit",
+        "sRGB"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "qwen_edit_couple",
+        "format": "png",
+        "format.bit_depth": "8-bit",
+        "format.input_color_space": "sRGB"
+      }
+    },
+    {
+      "id": 474,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        480,
+        920
+      ],
+      "size": [
+        375.2628583088489,
+        446
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 11
+        },
+        {
+          "name": "images.image_1",
+          "type": "IMAGE",
+          "link": 14
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": null
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "negative_prompt"
+          },
+          "link": null
+        },
+        {
+          "name": "resolution",
+          "type": "INT",
+          "widget": {
+            "name": "resolution"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            9
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21"
+      },
+      "widgets_values": [
+        "在照片中男士的右侧添加一位年轻亚洲女性一起合照，她面向镜头微笑，穿着与场合相符的浅色连衣裙，身高和透视与男士一致，光照方向、色温、白平衡与原照片完全一致，背景和地面保持原样",
+        "改变原人物，多余肢体，畸形手指，塑料感，颜色失真，明显拼贴边缘",
+        1280
+      ],
+      "widgets_values_named": {
+        "prompt": "在照片中男士的右侧添加一位年轻亚洲女性一起合照，她面向镜头微笑，穿着与场合相符的浅色连衣裙，身高和透视与男士一致，光照方向、色温、白平衡与原照片完全一致，背景和地面保持原样",
+        "negative_prompt": "改变原人物，多余肢体，畸形手指，塑料感，颜色失真，明显拼贴边缘",
+        "resolution": 1280
+      }
+    },
+    {
+      "id": 451,
+      "type": "UNETLoader",
+      "pos": [
+        880,
+        920
+      ],
+      "size": [
+        510,
+        90
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_turbo_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 457,
+      "type": "VAEDecode",
+      "pos": [
+        1280,
+        920
+      ],
+      "size": [
+        230,
+        60
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 6
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 454,
+      "type": "VAELoader",
+      "pos": [
+        80,
+        1340
+      ],
+      "size": [
+        510,
+        70
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1,
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_vae_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+      }
+    }
+  ],
+  "links": [
+    [
+      1,
+      454,
+      0,
+      457,
+      1,
+      "VAE"
+    ],
+    [
+      2,
+      451,
+      0,
+      469,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      504,
+      0,
+      505,
+      0,
+      "NOISE"
+    ],
+    [
+      4,
+      503,
+      0,
+      505,
+      2,
+      "SAMPLER"
+    ],
+    [
+      5,
+      502,
+      0,
+      505,
+      3,
+      "SIGMAS"
+    ],
+    [
+      6,
+      505,
+      0,
+      457,
+      0,
+      "LATENT"
+    ],
+    [
+      7,
+      469,
+      0,
+      507,
+      0,
+      "MODEL"
+    ],
+    [
+      8,
+      474,
+      0,
+      507,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      474,
+      1,
+      507,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      10,
+      507,
+      0,
+      505,
+      1,
+      "GUIDER"
+    ],
+    [
+      11,
+      453,
+      0,
+      474,
+      0,
+      "CLIP"
+    ],
+    [
+      12,
+      454,
+      0,
+      474,
+      2,
+      "VAE"
+    ],
+    [
+      13,
+      457,
+      0,
+      461,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      900,
+      0,
+      474,
+      1,
+      "IMAGE"
+    ],
+    [
+      15,
+      474,
+      2,
+      505,
+      4,
+      "LATENT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
