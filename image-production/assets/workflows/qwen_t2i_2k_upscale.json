@@ -1,0 +1,926 @@
+{
+  "last_node_id": 18,
+  "last_link_id": 17,
+  "nodes": [
+    {
+      "id": 489,
+      "type": "CFGGuider",
+      "pos": [
+        80,
+        80
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 7
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 10
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CFGGuider"
+      },
+      "widgets_values": [
+        1
+      ],
+      "widgets_values_named": {
+        "cfg": 1
+      }
+    },
+    {
+      "id": 453,
+      "type": "CLIPLoader",
+      "pos": [
+        480,
+        80
+      ],
+      "size": [
+        510,
+        120
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_8b_int8_convrot.safetensors",
+        "qwen_image",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+        "type": "qwen_image",
+        "device": "default"
+      }
+    },
+    {
+      "id": 456,
+      "type": "EmptyLatentImage",
+      "pos": [
+        880,
+        80
+      ],
+      "size": [
+        300,
+        120
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        2048,
+        2048,
+        1
+      ],
+      "widgets_values_named": {
+        "width": 1024,
+        "height": 1024,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 487,
+      "type": "KSamplerSelect",
+      "pos": [
+        1280,
+        80
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "title": "KSampler Select (euler)",
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "widgets_values_named": {
+        "sampler_name": "euler"
+      }
+    },
+    {
+      "id": 484,
+      "type": "ManualSigmas",
+      "pos": [
+        80,
+        500
+      ],
+      "size": [
+        418.9732421875,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "title": "Manual Sigmas (Qwen-Image-2.1-Turbo 8-step schedule)",
+      "properties": {
+        "Node name for S&R": "ManualSigmas"
+      },
+      "widgets_values": [
+        "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+      ],
+      "widgets_values_named": {
+        "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+      }
+    },
+    {
+      "id": 490,
+      "type": "QwenImage21Cache",
+      "pos": [
+        480,
+        500
+      ],
+      "size": [
+        270,
+        90
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 9
+        },
+        {
+          "name": "device",
+          "type": "COMBO",
+          "widget": {
+            "name": "device"
+          },
+          "link": null
+        },
+        {
+          "name": "dtype",
+          "type": "COMBO",
+          "widget": {
+            "name": "dtype"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "QwenImage21Cache"
+      },
+      "widgets_values": [
+        "auto",
+        "default"
+      ],
+      "widgets_values_named": {
+        "device": "auto",
+        "dtype": "default"
+      }
+    },
+    {
+      "id": 488,
+      "type": "RandomNoise",
+      "pos": [
+        880,
+        500
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "title": "Random Noise",
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        531123706903762,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "noise_seed": 531123706903762,
+        "control_after_generate": "randomize"
+      }
+    },
+    {
+      "id": 486,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1280,
+        500
+      ],
+      "size": [
+        220.2388671875,
+        106
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 3
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 4
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 5
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 6
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "title": "Sampler Custom Advanced",
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      }
+    },
+    {
+      "id": 461,
+      "type": "SaveImageAdvanced",
+      "pos": [
+        80,
+        920
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImageAdvanced"
+      },
+      "widgets_values": [
+        "qwen_beauty_sea_2k",
+        "png",
+        "8-bit",
+        "sRGB"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "qwen_beauty_sea_2k",
+        "format": "png",
+        "format.bit_depth": "8-bit",
+        "format.input_color_space": "sRGB"
+      }
+    },
+    {
+      "id": 452,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        480,
+        920
+      ],
+      "size": [
+        355.7457007437866,
+        181.4947103430324
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": null
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "negative_prompt"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            10
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21"
+      },
+      "widgets_values": [
+        "清晨的海边，薄雾弥漫在空气中，一位年轻亚洲女性站在齐踝的浅水里，身穿白色轻薄的长裙，赤脚，长发和裙摆被海风轻轻吹起，姿态自然放松，侧身微微回望镜头，神情安静柔和；远处海面、礁石和海岸线在晨霭里一层层淡出，两三只海鸥在她身后低空掠过，最近的一只贴着水面飞行，没有遮住人物；柔和的逆光穿过雾气形成淡淡的光晕，低对比，空气中有细腻的雾气层次；人物面部、发丝和裙料对焦精准、清晰锐利，皮肤有真实质感，织物纹理清楚，只有远景因雾气而变淡；真实摄影，85mm 中长焦，f/2 浅景深，柔和高光，电影感，高细节",
+        "模糊，失焦，噪点，低清晰度，塑料皮肤，畸形手指，多余肢体，海鸥过多，画面过暗，过曝",
+        2048
+      ],
+      "widgets_values_named": {
+        "prompt": "雨后的上海街头，霓虹倒映在湿滑的地面上，一位撑透明雨伞的女生走过，电影感，浅景深，高细节，真实摄影",
+        "negative_prompt": "",
+        "resolution": 1024
+      }
+    },
+    {
+      "id": 451,
+      "type": "UNETLoader",
+      "pos": [
+        880,
+        920
+      ],
+      "size": [
+        510,
+        90
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_turbo_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 457,
+      "type": "VAEDecode",
+      "pos": [
+        1280,
+        920
+      ],
+      "size": [
+        230,
+        60
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 8
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 454,
+      "type": "VAELoader",
+      "pos": [
+        80,
+        1340
+      ],
+      "size": [
+        510,
+        70
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_vae_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+      }
+    },
+    {
+      "id": 15,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        1560,
+        80
+      ],
+      "size": [
+        340,
+        90
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "RealESRGAN_x4plus.pth"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        1560,
+        220
+      ],
+      "size": [
+        340,
+        100
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 14
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageUpscaleWithModel"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 17,
+      "type": "ImageScale",
+      "pos": [
+        1560,
+        360
+      ],
+      "size": [
+        340,
+        130
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "lanczos",
+        3072,
+        3072,
+        "disabled"
+      ]
+    },
+    {
+      "id": 18,
+      "type": "SaveImage",
+      "pos": [
+        1960,
+        360
+      ],
+      "size": [
+        320,
+        320
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 17
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "qwen_beauty_sea_4k"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      453,
+      0,
+      452,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      454,
+      0,
+      457,
+      1,
+      "VAE"
+    ],
+    [
+      3,
+      488,
+      0,
+      486,
+      0,
+      "NOISE"
+    ],
+    [
+      4,
+      489,
+      0,
+      486,
+      1,
+      "GUIDER"
+    ],
+    [
+      5,
+      487,
+      0,
+      486,
+      2,
+      "SAMPLER"
+    ],
+    [
+      6,
+      484,
+      0,
+      486,
+      3,
+      "SIGMAS"
+    ],
+    [
+      7,
+      490,
+      0,
+      489,
+      0,
+      "MODEL"
+    ],
+    [
+      8,
+      486,
+      0,
+      457,
+      0,
+      "LATENT"
+    ],
+    [
+      9,
+      451,
+      0,
+      490,
+      0,
+      "MODEL"
+    ],
+    [
+      10,
+      452,
+      0,
+      489,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      452,
+      1,
+      489,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      456,
+      0,
+      486,
+      4,
+      "LATENT"
+    ],
+    [
+      13,
+      457,
+      0,
+      461,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      15,
+      0,
+      16,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      15,
+      16,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      457,
+      0,
+      16,
+      1,
+      "IMAGE"
+    ],
+    [
+      17,
+      17,
+      0,
+      18,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
